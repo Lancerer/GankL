@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/all"
+            android:title="@string/all" />
+        <item
+            android:id="@+id/nav_android"
+            android:icon="@drawable/android"
+            android:title="@string/android" />
+        <item
+            android:id="@+id/nav_before"
+            android:icon="@drawable/before"
+            android:title="@string/before" />
+        <item
+            android:id="@+id/nav_gril"
+            android:icon="@drawable/girl"
+            android:title="@string/gril" />
+        <item
+            android:id="@+id/nav_ios"
+            android:icon="@drawable/ios"
+            android:title="@string/ios" />
+        <item
+            android:id="@+id/nav_res"
+            android:icon="@drawable/res"
+            android:title="@string/res" />
+        <item
+            android:id="@+id/nav_zhihu"
+            android:icon="@drawable/zhihu"
+            android:title="@string/zhihu" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_zhuti"
+                android:icon="@drawable/zhuti"
+                android:title="@string/zhuti" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/about"
+                android:title="@string/about" />
+        </menu>
+    </item>
+
+</menu>

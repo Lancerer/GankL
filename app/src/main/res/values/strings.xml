@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">GankL</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="all">all</string>
+    <string name="before">前端</string>
+    <string name="res">拓展资料</string>
+    <string name="android">Android</string>
+    <string name="ios">ios</string>
+    <string name="gril">女孩</string>
+    <string name="zhihu">知乎日报</string>
+    <string name="zhuti">主题中心</string>
+    <string name="about">关于</string>
+    <string name="email">邮箱：tyk790406977@126.com</string>
+    <string name="github">github:https://github.com/Lancerer/</string>
+    <string name="csdn">csdn:https://blog.csdn.net/Lancerr</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
