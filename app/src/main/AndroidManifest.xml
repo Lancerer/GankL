@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lancer.gankl">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -25,6 +26,7 @@
         <activity
             android:name=".mvp.activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".mvp.activity.WebActivity"></activity>
     </application>
 
 </manifest>
