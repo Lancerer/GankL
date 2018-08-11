@@ -26,4 +26,9 @@ public class Constants {
     public static final String CONFIGFILE = "config";
     //更新theme
     public static final String UPDATA_THEME = "updata_theme";
+
+    public static final int TYPE_NORMAL = 1;
+    public static final int TYPE_FOOT = 2;
+
+    public static final int totalPage = 30;
 }

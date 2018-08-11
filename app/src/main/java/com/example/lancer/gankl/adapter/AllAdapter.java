@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lancer.gankl.R;
-import com.example.lancer.gankl.bean.gank.AndroidBean;
+import com.example.lancer.gankl.bean.gank.AllBean;
 import com.example.lancer.gankl.mvp.activity.WebActivity;
 import com.example.lancer.gankl.util.Constants;
 
@@ -25,14 +25,13 @@ import java.util.List;
  * email:tyk790406977@126.com
  */
 
-public class AndroidAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
-    private List<AndroidBean.ResultsBean> mList;
+public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
+    private List<AllBean.ResultsBean> mList;
 
-
-    public AndroidAdapter(List<AndroidBean.ResultsBean> list, Context context) {
-        mList = list;
+    public AllAdapter(Context context, List<AllBean.ResultsBean> list) {
         mContext = context;
+        mList = list;
     }
 
     @Override
@@ -40,12 +39,11 @@ public class AndroidAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (viewType == Constants.TYPE_NORMAL) {
             View view = View.inflate(mContext, R.layout.item_android, null);
             NormalViewHolder normalViewHolder = new NormalViewHolder(view);
-            view.setOnClickListener(this);
+
             return normalViewHolder;
         } else {
             View view = View.inflate(mContext, R.layout.item_foot, null);
             FootViewHolder footViewHolder = new FootViewHolder(view);
-            view.setOnClickListener(this);
             return footViewHolder;
         }
     }
@@ -129,23 +127,5 @@ public class AndroidAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             pb = view.findViewById(R.id.pb);
             tvLoad = view.findViewById(R.id.tv_load);
         }
-    }
-
-    private onItemClickListener mOnItemClickListener = null;
-
-    public static interface onItemClickListener {
-        void onClick(View view, int position);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            mOnItemClickListener.onClick(v, (int) v.getTag());
-        }
-    }
-
-    //最后暴露给外面的调用者，定义一个设置Listener的方法（）：
-    public void setOnItemClickListener(onItemClickListener listener) {
-        this.mOnItemClickListener = listener;
     }
 }
