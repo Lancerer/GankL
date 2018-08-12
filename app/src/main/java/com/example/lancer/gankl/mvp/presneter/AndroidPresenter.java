@@ -82,7 +82,7 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mAndroidAdapter = new AndroidAdapter(mList, context);
-                                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                                //mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mAndroidAdapter);
                             } else {
                                 List<AndroidBean.ResultsBean> results = value.getResults();

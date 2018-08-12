@@ -31,12 +31,12 @@ import io.reactivex.schedulers.Schedulers;
  * email:tyk790406977@126.com
  */
 
-public class IosPresenter extends BasePresenter<IosView> {
+public class IosPresenter extends BasePresenter<AndroidView> {
     private Context mContext;
     private int page = 1;
 
     private boolean isloadMore = false;
-    private IosView mIosView;
+    private AndroidView mAndroidView;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private IosAdapter mIosAdapter;
@@ -48,12 +48,12 @@ public class IosPresenter extends BasePresenter<IosView> {
     }
 
     @Override
-    protected IosView getView() {
+    protected AndroidView getView() {
         return super.getView();
     }
 
     @Override
-    public void attachView(IosView view) {
+    public void attachView(AndroidView view) {
         super.attachView(view);
     }
 
@@ -63,10 +63,10 @@ public class IosPresenter extends BasePresenter<IosView> {
     }
 
     public void getIos(final Boolean flag, final Context context) {
-        mIosView = getView();
-        if (mIosView != null) {
-            mRecyclerView = mIosView.getRecycleView();
-            mLinearLayoutManager = mIosView.getLinearLayoutManager();
+        mAndroidView = getView();
+        if (mAndroidView != null) {
+            mRecyclerView = mAndroidView.getRecycleView();
+            mLinearLayoutManager = mAndroidView.getLinearLayoutManager();
 
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getGankIos(page)
@@ -83,7 +83,7 @@ public class IosPresenter extends BasePresenter<IosView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mIosAdapter = new IosAdapter(context, mList);
-                                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                               // mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mIosAdapter);
                             } else {
                                 List<IosBean.ResultsBean> results = value.getResults();

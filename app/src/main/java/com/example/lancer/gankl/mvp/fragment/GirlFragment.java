@@ -2,6 +2,7 @@ package com.example.lancer.gankl.mvp.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,7 +21,7 @@ import com.example.lancer.gankl.mvp.view.GirlView;
 public class GirlFragment extends BaseFragment<GirlView, GirlPresenter> implements GirlView {
     private android.support.v4.widget.SwipeRefreshLayout refreshGirl;
     private RecyclerView recycleGirl;
-    private GridLayoutManager mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+    private GridLayoutManager mGridLayoutManager ;
 
     @Override
     public RecyclerView getRecycleView() {
@@ -47,7 +48,13 @@ public class GirlFragment extends BaseFragment<GirlView, GirlPresenter> implemen
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        mGridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recycleGirl.setLayoutManager(mGridLayoutManager);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.getGirl(true, getContext());
         mPresenter.ScrollRecycleView();
         refreshGirl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -57,12 +64,6 @@ public class GirlFragment extends BaseFragment<GirlView, GirlPresenter> implemen
                 refreshGirl.setRefreshing(false);
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
     }
 
     @Override

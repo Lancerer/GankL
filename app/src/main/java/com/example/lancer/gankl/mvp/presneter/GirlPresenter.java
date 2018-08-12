@@ -79,7 +79,7 @@ public class GirlPresenter extends BasePresenter<GirlView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mGirlAdapter = new GirlAdapter(context, mList);
-                                mRecyclerView.setLayoutManager(mGridLayoutManager);
+                             //   mRecyclerView.setLayoutManager(mGridLayoutManager);
                                 mRecyclerView.setAdapter(mGirlAdapter);
                             } else {
                                 List<MeiziBean.ResultsBean> results = value.getResults();

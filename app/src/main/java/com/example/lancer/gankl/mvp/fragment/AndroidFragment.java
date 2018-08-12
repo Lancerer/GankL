@@ -1,6 +1,8 @@
 package com.example.lancer.gankl.mvp.fragment;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +19,7 @@ public class AndroidFragment extends BaseFragment<AndroidView, AndroidPresenter>
 
     private android.support.v4.widget.SwipeRefreshLayout refreshAndroid;
     private android.support.v7.widget.RecyclerView recycleAndroid;
-    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+    private LinearLayoutManager mLinearLayoutManager ;
 
     @Override
     protected int initLayout() {
@@ -32,14 +34,20 @@ public class AndroidFragment extends BaseFragment<AndroidView, AndroidPresenter>
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        recycleAndroid.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.getAdnroid(true, getContext());
         mPresenter.ScrollRecycleView();
 
         refreshAndroid.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-              mPresenter.getmore();
+                mPresenter.getmore();
                 refreshAndroid.setRefreshing(false);
             }
         });
@@ -55,11 +63,6 @@ public class AndroidFragment extends BaseFragment<AndroidView, AndroidPresenter>
         return recycleAndroid;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
-    }
 
     @Override
     public LinearLayoutManager getLinearLayoutManager() {

@@ -2,6 +2,7 @@ package com.example.lancer.gankl.mvp.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,11 @@ import com.example.lancer.gankl.mvp.view.AndroidView;
 import com.example.lancer.gankl.mvp.view.BeforeView;
 
 
-public class BeforeFragment extends BaseFragment<BeforeView, BeforePresenter> implements BeforeView {
+public class BeforeFragment extends BaseFragment<AndroidView, BeforePresenter> implements AndroidView {
 
     private android.support.v4.widget.SwipeRefreshLayout refreshBefore;
     private RecyclerView recycleBefore;
-    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     public RecyclerView getRecycleView() {
@@ -47,7 +48,13 @@ public class BeforeFragment extends BaseFragment<BeforeView, BeforePresenter> im
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        recycleBefore.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.getBefore(true, getContext());
         mPresenter.ScrollRecycleView();
         refreshBefore.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -57,12 +64,6 @@ public class BeforeFragment extends BaseFragment<BeforeView, BeforePresenter> im
                 refreshBefore.setRefreshing(false);
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
     }
 
     @Override

@@ -31,10 +31,10 @@ import io.reactivex.schedulers.Schedulers;
  * email:tyk790406977@126.com
  */
 
-public class AllPresenter extends BasePresenter<AllView> {
+public class AllPresenter extends BasePresenter<AndroidView> {
     private Context mContext;
     private int page = 1;
-    private AllView mAllView;
+    private AndroidView AndroidView;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private AllAdapter mAllAdapter;
@@ -46,12 +46,12 @@ public class AllPresenter extends BasePresenter<AllView> {
     }
 
     @Override
-    protected AllView getView() {
+    protected AndroidView getView() {
         return super.getView();
     }
 
     @Override
-    public void attachView(AllView view) {
+    public void attachView(AndroidView view) {
         super.attachView(view);
     }
 
@@ -61,10 +61,10 @@ public class AllPresenter extends BasePresenter<AllView> {
     }
 
     public void getAll(final boolean flag, final Context context) {
-        mAllView=getView();
-        if(mAllView!=null){
-            mRecyclerView = mAllView.getRecycleView();
-            mLinearLayoutManager = mAllView.getLinearLayoutManager();
+        AndroidView=getView();
+        if(AndroidView!=null){
+            mRecyclerView = AndroidView.getRecycleView();
+            mLinearLayoutManager = AndroidView.getLinearLayoutManager();
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getGankAll(page)
                     .subscribeOn(Schedulers.io())
@@ -80,7 +80,7 @@ public class AllPresenter extends BasePresenter<AllView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mAllAdapter = new AllAdapter(context, mList);
-                                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                               // mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mAllAdapter);
                             } else {
                                 List<AllBean.ResultsBean> results = value.getResults();

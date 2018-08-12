@@ -31,12 +31,12 @@ import io.reactivex.schedulers.Schedulers;
  * email:tyk790406977@126.com
  */
 
-public class ResPresenter extends BasePresenter<ResView> {
+public class ResPresenter extends BasePresenter<AndroidView> {
     private Context mContext;
     private int page = 1;
 
     private boolean isloadMore = false;
-    private ResView mResView;
+    private AndroidView mAndroidView;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private ResAdapter mResAdapter;
@@ -48,7 +48,12 @@ public class ResPresenter extends BasePresenter<ResView> {
     }
 
     @Override
-    public void attachView(ResView view) {
+    protected AndroidView getView() {
+        return super.getView();
+    }
+
+    @Override
+    public void attachView(AndroidView view) {
         super.attachView(view);
     }
 
@@ -57,16 +62,11 @@ public class ResPresenter extends BasePresenter<ResView> {
         super.detachView();
     }
 
-    @Override
-    protected ResView getView() {
-        return super.getView();
-    }
-
     public void getRes(final boolean flag, final Context context) {
-        mResView = getView();
-        if (mResView != null) {
-            mRecyclerView = mResView.getRecycleView();
-            mLinearLayoutManager = mResView.getLinearLayoutManager();
+        mAndroidView = getView();
+        if (mAndroidView != null) {
+            mRecyclerView = mAndroidView.getRecycleView();
+            mLinearLayoutManager = mAndroidView.getLinearLayoutManager();
 
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getGankRes(page)
@@ -83,7 +83,7 @@ public class ResPresenter extends BasePresenter<ResView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mResAdapter = new ResAdapter(context, mList);
-                                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                             //   mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mResAdapter);
                             } else {
                                 List<ResBean.ResultsBean> results = value.getResults();

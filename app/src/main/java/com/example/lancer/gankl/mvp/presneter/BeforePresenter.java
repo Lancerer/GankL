@@ -31,12 +31,12 @@ import io.reactivex.schedulers.Schedulers;
  * email:tyk790406977@126.com
  */
 
-public class BeforePresenter extends BasePresenter<BeforeView> {
+public class BeforePresenter extends BasePresenter<AndroidView> {
     private Context mContext;
     private int page = 1;
 
     private boolean isloadMore = false;
-    private BeforeView mBeforeView;
+    private AndroidView mAndroidView;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private BeforeAdapter mBeforeAdapter;
@@ -48,12 +48,12 @@ public class BeforePresenter extends BasePresenter<BeforeView> {
     }
 
     @Override
-    protected BeforeView getView() {
+    protected AndroidView getView() {
         return super.getView();
     }
 
     @Override
-    public void attachView(BeforeView view) {
+    public void attachView(AndroidView view) {
         super.attachView(view);
     }
 
@@ -61,12 +61,11 @@ public class BeforePresenter extends BasePresenter<BeforeView> {
     public void detachView() {
         super.detachView();
     }
-
     public void getBefore(final Boolean flag, final Context context) {
-        mBeforeView = getView();
-        if (mBeforeView != null) {
-            mRecyclerView = mBeforeView.getRecycleView();
-            mLinearLayoutManager = mBeforeView.getLinearLayoutManager();
+        mAndroidView = getView();
+        if (mAndroidView != null) {
+            mRecyclerView = mAndroidView.getRecycleView();
+            mLinearLayoutManager = mAndroidView.getLinearLayoutManager();
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getGankBefore(page)
                     .subscribeOn(Schedulers.io())
@@ -82,7 +81,7 @@ public class BeforePresenter extends BasePresenter<BeforeView> {
                             if (flag) {
                                 mList = value.getResults();
                                 mBeforeAdapter = new BeforeAdapter(context, mList);
-                                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                             //   mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mBeforeAdapter);
                             } else {
                                 List<BeforeBean.ResultsBean> results = value.getResults();

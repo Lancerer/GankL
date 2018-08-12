@@ -2,6 +2,7 @@ package com.example.lancer.gankl.mvp.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +18,8 @@ import com.example.lancer.gankl.mvp.view.AndroidView;
 import com.example.lancer.gankl.mvp.view.IosView;
 
 
-public class IosFragment extends BaseFragment<IosView, IosPresenter> implements IosView {
-    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+public class IosFragment extends BaseFragment<AndroidView, IosPresenter> implements AndroidView {
+    private LinearLayoutManager mLinearLayoutManager ;
     private android.support.v4.widget.SwipeRefreshLayout refreshIos;
     private RecyclerView recycleIos;
 
@@ -46,7 +47,13 @@ public class IosFragment extends BaseFragment<IosView, IosPresenter> implements 
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        recycleIos.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.getIos(true,getContext());
         mPresenter.ScrollRecycleView();
         refreshIos.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -56,12 +63,6 @@ public class IosFragment extends BaseFragment<IosView, IosPresenter> implements 
                 mPresenter.getmore();
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
     }
 
     @Override

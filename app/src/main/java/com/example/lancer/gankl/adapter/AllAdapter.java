@@ -53,10 +53,11 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof NormalViewHolder) {
             ((NormalViewHolder) holder).tvAndroidTitle.setText(mList.get(position).getDesc());
             final List<String> images = mList.get(position).getImages();
-            if (images == null) {
-                Glide.with(mContext).load(R.drawable.cat).into(((NormalViewHolder) holder).ivAndroidImg);
-            } else {
+            if (images != null&&images.size()>0) {
                 Glide.with(mContext).load(images.get(0)).into(((NormalViewHolder) holder).ivAndroidImg);
+
+            } else {
+                Glide.with(mContext).load(R.drawable.cat).into(((NormalViewHolder) holder).ivAndroidImg);
             }
             ((NormalViewHolder) holder).cdAndroid.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,6 +1,8 @@
 package com.example.lancer.gankl.mvp.fragment;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +12,10 @@ import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.base.BaseFragment;
 import com.example.lancer.gankl.mvp.presneter.ResPresenter;
 import com.example.lancer.gankl.mvp.view.AndroidView;
-import com.example.lancer.gankl.mvp.view.ResView;
 
 
-public class ResFragment extends BaseFragment<ResView, ResPresenter> implements ResView {
-    private LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+public class ResFragment extends BaseFragment<AndroidView, ResPresenter> implements AndroidView {
+    private LinearLayoutManager mLinearLayoutManager;
     private android.support.v4.widget.SwipeRefreshLayout refreshRes;
     private RecyclerView recycleRes;
 
@@ -42,7 +43,13 @@ public class ResFragment extends BaseFragment<ResView, ResPresenter> implements 
 
     @Override
     protected void initData() {
-        mPresenter.attachView(this);
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        recycleRes.setLayoutManager(mLinearLayoutManager);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.getRes(true, getContext());
         mPresenter.ScrollRecycleView();
         refreshRes.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -52,12 +59,6 @@ public class ResFragment extends BaseFragment<ResView, ResPresenter> implements 
                 mPresenter.getmore();
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
     }
 
     @Override
