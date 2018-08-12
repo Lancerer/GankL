@@ -15,7 +15,7 @@ import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.base.BaseFragment;
 import com.example.lancer.gankl.mvp.presneter.BeforePresenter;
 import com.example.lancer.gankl.mvp.view.AndroidView;
-import com.example.lancer.gankl.mvp.view.BeforeView;
+
 
 
 public class BeforeFragment extends BaseFragment<AndroidView, BeforePresenter> implements AndroidView {

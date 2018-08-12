@@ -59,7 +59,7 @@ public class AndroidAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 Glide.with(mContext).load(images.get(0)).into(((NormalViewHolder) holder).ivAndroidImg);
 
             } else {
-                Glide.with(mContext).load(R.drawable.cat).into(((NormalViewHolder) holder).ivAndroidImg);
+                Glide.with(mContext).load(R.drawable.sea).into(((NormalViewHolder) holder).ivAndroidImg);
             }
             ((NormalViewHolder) holder).cdAndroid.setOnClickListener(new View.OnClickListener() {
                 @Override

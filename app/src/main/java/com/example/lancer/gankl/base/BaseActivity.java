@@ -47,4 +47,5 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected abstract void initData();
 
     protected abstract T createPresenter();
+
 }

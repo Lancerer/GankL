@@ -15,10 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.lancer.gankl.R;
@@ -249,5 +251,21 @@ public class MainActivity extends BaseActivity
         iv_splash = headerView.findViewById(R.id.iv_splash);
         tab = findViewById(R.id.tab);
         vp = findViewById(R.id.vp);
+    }
+
+    private long endTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - endTime) > 2000) {
+                Toast.makeText(this, "在按一次退出程序", Toast.LENGTH_SHORT).show();
+                endTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

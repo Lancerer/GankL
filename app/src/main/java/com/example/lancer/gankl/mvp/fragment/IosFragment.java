@@ -15,7 +15,7 @@ import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.base.BaseFragment;
 import com.example.lancer.gankl.mvp.presneter.IosPresenter;
 import com.example.lancer.gankl.mvp.view.AndroidView;
-import com.example.lancer.gankl.mvp.view.IosView;
+
 
 
 public class IosFragment extends BaseFragment<AndroidView, IosPresenter> implements AndroidView {

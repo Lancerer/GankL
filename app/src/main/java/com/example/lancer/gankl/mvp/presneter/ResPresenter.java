@@ -12,7 +12,7 @@ import com.example.lancer.gankl.base.BasePresenter;
 import com.example.lancer.gankl.bean.gank.AndroidBean;
 import com.example.lancer.gankl.bean.gank.ResBean;
 import com.example.lancer.gankl.mvp.view.AndroidView;
-import com.example.lancer.gankl.mvp.view.ResView;
+
 import com.example.lancer.gankl.util.Constants;
 import com.example.lancer.gankl.util.NetUtil;
 

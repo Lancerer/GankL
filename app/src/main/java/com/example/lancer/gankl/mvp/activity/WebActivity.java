@@ -3,6 +3,7 @@ package com.example.lancer.gankl.mvp.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebSettings;
+import android.webkit.WebViewClient;
 
 import com.bumptech.glide.Glide;
 import com.example.lancer.gankl.R;
@@ -43,12 +44,13 @@ public class WebActivity extends BaseActivity {
         if (image != null) {
             Glide.with(this).load(image).into(ivWebImg);
         } else {
-            ivWebImg.setImageResource(R.drawable.cat);
+            ivWebImg.setImageResource(R.drawable.sea);
         }
         tvImgSource.setText(who);
         tvImgTitle.setText(title);
 
         webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient());
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         // 设置可以支持缩放

@@ -15,7 +15,7 @@ import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.base.BaseFragment;
 import com.example.lancer.gankl.base.BasePresenter;
 import com.example.lancer.gankl.mvp.presneter.AllPresenter;
-import com.example.lancer.gankl.mvp.view.AllView;
+
 import com.example.lancer.gankl.mvp.view.AndroidView;
 
 

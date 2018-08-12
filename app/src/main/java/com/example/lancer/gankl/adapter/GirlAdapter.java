@@ -1,6 +1,7 @@
 package com.example.lancer.gankl.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.bean.gank.MeiziBean;
+import com.example.lancer.gankl.mvp.activity.BigPicActivity;
 import com.example.lancer.gankl.util.Constants;
 
 import java.util.List;
@@ -45,9 +47,17 @@ public class GirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof NormalViewHolder) {
             Glide.with(mContext).load(mList.get(position).getUrl()).into(((NormalViewHolder) holder).ivGirl);
+            ((NormalViewHolder) holder).ivGirl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, BigPicActivity.class);
+                    intent.putExtra("imgurl", mList.get(position).getUrl());
+                    mContext.startActivity(intent);
+                }
+            });
         }else if(holder instanceof FootViewHolder){
             ((FootViewHolder) holder).pb.setVisibility(View.VISIBLE);
             ((FootViewHolder) holder).tvLoad.setText("正在加载。。。");
