@@ -24,7 +24,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         ThemeUtil.getInstance().init(this);
         setContentView(initLayout());
-        if (mPresenter != null) {
+        if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }

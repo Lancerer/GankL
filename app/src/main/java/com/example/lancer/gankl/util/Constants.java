@@ -26,9 +26,16 @@ public class Constants {
     public static final String CONFIGFILE = "config";
     //更新theme
     public static final String UPDATA_THEME = "updata_theme";
-
+    /**
+     * 普通布局
+     */
     public static final int TYPE_NORMAL = 1;
+    /**
+     * 脚布局
+     */
     public static final int TYPE_FOOT = 2;
-
+    /**
+     * 总页数
+     */
     public static final int totalPage = 30;
 }
