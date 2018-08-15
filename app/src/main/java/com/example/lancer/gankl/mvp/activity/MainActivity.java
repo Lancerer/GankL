@@ -60,6 +60,10 @@ public class MainActivity extends BaseActivity
     private String[] tabtitle = {"all", "android", "before", "girl", "ios", "res", "知乎"};
     private List<Fragment> mFragments = new ArrayList<>();
     private FragmentManager mFragmentManager;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private android.support.design.widget.FloatingActionButton fab;
+    private NavigationView navView;
 
     @Override
     protected void initData() {
@@ -251,6 +255,10 @@ public class MainActivity extends BaseActivity
         iv_splash = headerView.findViewById(R.id.iv_splash);
         tab = findViewById(R.id.tab);
         vp = findViewById(R.id.vp);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toolbar = findViewById(R.id.toolbar);
+        fab = findViewById(R.id.fab);
+        navView = findViewById(R.id.nav_view);
     }
 
     private long endTime = 0;

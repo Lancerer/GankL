@@ -3,17 +3,15 @@ package com.example.lancer.gankl.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.base.BaseFragment;
-import com.example.lancer.gankl.base.BasePresenter;
+
 import com.example.lancer.gankl.mvp.presneter.ZhihuPresenter;
 import com.example.lancer.gankl.mvp.view.AndroidView;
 
@@ -22,6 +20,7 @@ public class ZhihuFragment extends BaseFragment<AndroidView, ZhihuPresenter> imp
     private android.support.v4.widget.SwipeRefreshLayout refreshZhihu;
     private RecyclerView recycleZhihu;
     private LinearLayoutManager mLinearLayoutManager;
+
 
     @Override
     protected int initLayout() {
@@ -39,6 +38,7 @@ public class ZhihuFragment extends BaseFragment<AndroidView, ZhihuPresenter> imp
     protected void initData() {
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         recycleZhihu.setLayoutManager(mLinearLayoutManager);
+
     }
 
     @Override
