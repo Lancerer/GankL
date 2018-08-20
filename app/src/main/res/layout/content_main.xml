@@ -18,7 +18,7 @@
         app:tabTextAppearance="@style/tabTextStyle"
         app:tabTextColor="@color/grassGreen" />
 
-    <android.support.v4.view.ViewPager
+    <com.example.lancer.gankl.weight.MyViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

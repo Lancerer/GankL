@@ -34,6 +34,7 @@ import com.example.lancer.gankl.mvp.fragment.IosFragment;
 import com.example.lancer.gankl.mvp.fragment.ResFragment;
 import com.example.lancer.gankl.mvp.fragment.ZhihuFragment;
 import com.example.lancer.gankl.util.ThemeUtil;
+import com.example.lancer.gankl.weight.MyViewPager;
 
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class MainActivity extends BaseActivity
     private NavigationView mNavigationView;
     private ImageView iv_splash;
     private android.support.design.widget.TabLayout tab;
-    private android.support.v4.view.ViewPager vp;
+    private MyViewPager vp;
     private String[] tabtitle = {"all", "android", "before", "girl", "ios", "res", "知乎"};
     private List<Fragment> mFragments = new ArrayList<>();
     private FragmentManager mFragmentManager;
