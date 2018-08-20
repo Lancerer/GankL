@@ -4,7 +4,13 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
 
+import com.bm.library.Info;
+import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
+import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.adapter.GirlAdapter;
 import com.example.lancer.gankl.api.GankApi;
 import com.example.lancer.gankl.base.BasePresenter;
@@ -40,6 +46,13 @@ public class GirlPresenter extends BasePresenter<GirlView> {
     private int lastVisibleItem;
 
 
+    private Info mInfo;
+    View mParent;
+    View mBg;
+    PhotoView mPhotoView;
+    AlphaAnimation in = new AlphaAnimation(0, 1);
+    AlphaAnimation out = new AlphaAnimation(1, 0);
+
     public GirlPresenter(Context context) {
         mContext = context;
     }
@@ -64,6 +77,9 @@ public class GirlPresenter extends BasePresenter<GirlView> {
         if (mGirlView != null) {
             mRecyclerView = mGirlView.getRecycleView();
             mGridLayoutManager = mGirlView.getGridLayoutManager();
+            mParent = mGirlView.getFrameLayout();
+            mBg = mGirlView.getImageView();
+            mPhotoView = mGirlView.getPhotoView();
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getMeizi(page)
                     .subscribeOn(Schedulers.io())
@@ -75,16 +91,39 @@ public class GirlPresenter extends BasePresenter<GirlView> {
                         }
 
                         @Override
-                        public void onNext(MeiziBean value) {
+                        public void onNext(final MeiziBean value) {
                             if (flag) {
                                 mList = value.getResults();
                                 mGirlAdapter = new GirlAdapter(context, mList);
-                             //   mRecyclerView.setLayoutManager(mGridLayoutManager);
+                                //   mRecyclerView.setLayoutManager(mGridLayoutManager);
                                 mRecyclerView.setAdapter(mGirlAdapter);
+
+                                mGirlAdapter.setOnItemClickListener(new GirlAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        PhotoView photoView =  view.findViewById(R.id.iv_girl);
+                                        mInfo = photoView.getInfo();
+                                        Glide.with(mContext).load(mList.get(position).getUrl()).into(mPhotoView);
+                                        mParent.setVisibility(View.VISIBLE);
+                                        mPhotoView.animaFrom(mInfo);
+                                    }
+                                });
+                                mPhotoView.enable();
+                                mPhotoView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mPhotoView.animaTo(mInfo, new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mParent.setVisibility(View.GONE);
+                                            }
+                                        });
+                                    }
+                                });
                             } else {
                                 List<MeiziBean.ResultsBean> results = value.getResults();
                                 mList.addAll(results);
-                                if(mGirlAdapter!=null){
+                                if (mGirlAdapter != null) {
                                     mGirlAdapter.notifyDataSetChanged();
                                 }
 
@@ -125,6 +164,7 @@ public class GirlPresenter extends BasePresenter<GirlView> {
             }
         });
     }
+
 
     public void getMore() {
         getGirl(false, mContext);

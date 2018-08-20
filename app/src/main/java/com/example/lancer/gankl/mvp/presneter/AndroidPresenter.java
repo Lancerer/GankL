@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 
+import com.bumptech.glide.Glide;
+import com.example.lancer.gankl.R;
 import com.example.lancer.gankl.adapter.AndroidAdapter;
+import com.example.lancer.gankl.adapter.CommonAdapter;
+import com.example.lancer.gankl.adapter.CommonHolder;
 import com.example.lancer.gankl.api.GankApi;
 import com.example.lancer.gankl.base.BasePresenter;
 import com.example.lancer.gankl.bean.gank.AndroidBean;
@@ -33,7 +37,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AndroidPresenter extends BasePresenter<AndroidView> {
     private Context mContext;
     private int page = 1;
-
+    private CommonAdapter mCommonAdapter;
     private boolean isloadMore = false;
     private AndroidView mAndroidView;
     private RecyclerView mRecyclerView;
@@ -81,7 +85,25 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
                         public void onNext(AndroidBean value) {
                             if (flag) {
                                 mList = value.getResults();
-                                mAndroidAdapter = new AndroidAdapter(mList, context);
+                             /*   mRecyclerView.setAdapter(mCommonAdapter=new CommonAdapter<AndroidBean.ResultsBean, String, String>(mContext, R.layout.item_android, mList, 0, null, R.layout.item_foot, null) {
+                                    @Override
+                                    public void convertBody(CommonHolder holder, AndroidBean.ResultsBean data, int position) {
+                                        holder.setText(R.id.tv_android_title, data.getDesc());
+                                        List<String> images = data.getImages();
+                                        if (images != null && images.size() > 0) {
+                                            holder.setImageNet(R.id.iv_android_img, images.get(0), mContext);
+
+                                        } else {
+                                            holder.setImageResource(R.id.iv_android_img, R.drawable.sea);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void convertFooter(CommonHolder holder, String data, int position) {
+                                        holder.setText(R.id.tv_load,"loading....");
+                                    }
+                                });*/
+                               mAndroidAdapter = new AndroidAdapter(mList, context);
                                 //mRecyclerView.setLayoutManager(mLinearLayoutManager);
                                 mRecyclerView.setAdapter(mAndroidAdapter);
                             } else {

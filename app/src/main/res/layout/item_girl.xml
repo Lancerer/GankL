@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <com.bm.library.PhotoView
         android:id="@+id/iv_girl"
         android:layout_width="260dp"
         android:layout_height="320dp"
         android:layout_margin="5dp"
-        android:background="@drawable/girl_bg"
         android:scaleType="centerCrop" />
+
 </LinearLayout>
