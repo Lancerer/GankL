@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/commonadapter" />
+            <option value="$PROJECT_DIR$/rxretorfitutils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -7,8 +7,19 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.lancer.gankl.util.NetUtil;
+import com.example.lancer.gankl.util.NetWorkUtil;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * author: Lancer
@@ -22,7 +33,7 @@ public class CommonHolder extends RecyclerView.ViewHolder {
 
     public CommonHolder(View itemView) {
         super(itemView);
-        mViews = new SparseArray<View>();
+        mViews = new SparseArray<>();
     }
 
     public <T extends View> T findView(int ViewId) {
@@ -65,4 +76,6 @@ public class CommonHolder extends RecyclerView.ViewHolder {
         Glide.with(context).load(url).into(imageView);
         return this;
     }
+
+
 }

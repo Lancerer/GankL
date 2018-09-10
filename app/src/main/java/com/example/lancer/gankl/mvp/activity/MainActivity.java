@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity
     private Toolbar toolbar;
     private android.support.design.widget.FloatingActionButton fab;
     private NavigationView navView;
+    private Fragment mFragment;
 
     @Override
     protected void initData() {
@@ -258,7 +259,6 @@ public class MainActivity extends BaseActivity
         vp = findViewById(R.id.vp);
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
-        fab = findViewById(R.id.fab);
         navView = findViewById(R.id.nav_view);
     }
 
@@ -270,6 +270,8 @@ public class MainActivity extends BaseActivity
             if ((System.currentTimeMillis() - endTime) > 2000) {
                 Toast.makeText(this, "在按一次退出程序", Toast.LENGTH_SHORT).show();
                 endTime = System.currentTimeMillis();
+            }else if(mFragments instanceof GirlFragment){
+                ((GirlFragment)mFragments).out();
             } else {
                 finish();
             }
