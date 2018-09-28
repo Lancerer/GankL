@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity
     private android.support.design.widget.FloatingActionButton fab;
     private NavigationView navView;
     private Fragment mFragment;
+    private GirlFragment mGirlFragment;
 
     @Override
     protected void initData() {
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity
 
         mNavigationView.setNavigationItemSelectedListener(this);
         mFragmentManager = getSupportFragmentManager();
-
+        mGirlFragment = new GirlFragment();
         loadPic();
         initTab();
         initFragment();
@@ -192,7 +193,7 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            startActivity(new Intent(MainActivity.this,SearchActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -267,11 +268,11 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - endTime) > 2000) {
+            if (mFragment instanceof GirlFragment) {
+                mGirlFragment.out();
+            }else if ((System.currentTimeMillis() - endTime) > 2000) {
                 Toast.makeText(this, "在按一次退出程序", Toast.LENGTH_SHORT).show();
                 endTime = System.currentTimeMillis();
-            }else if(mFragments instanceof GirlFragment){
-                ((GirlFragment)mFragments).out();
             } else {
                 finish();
             }

@@ -6,11 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.lancer.gankl.adapter.AllAdapter;
-import com.example.lancer.gankl.adapter.AndroidAdapter;
+
 import com.example.lancer.gankl.api.GankApi;
 import com.example.lancer.gankl.base.BasePresenter;
 import com.example.lancer.gankl.bean.gank.AllBean;
-import com.example.lancer.gankl.bean.gank.AndroidBean;
+
 
 import com.example.lancer.gankl.mvp.view.AndroidView;
 import com.example.lancer.gankl.util.Constants;

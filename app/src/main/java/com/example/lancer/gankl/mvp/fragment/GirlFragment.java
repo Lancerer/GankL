@@ -96,7 +96,8 @@ public class GirlFragment extends BaseFragment<GirlView, GirlPresenter> implemen
         return new GirlPresenter(getContext());
     }
 
-    public void out(){
+    public void out() {
         parent.setVisibility(View.GONE);
     }
+
 }

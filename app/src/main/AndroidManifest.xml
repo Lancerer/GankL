@@ -28,7 +28,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mvp.activity.WebActivity" />
         <activity android:name=".mvp.activity.BigPicActivity" />
-        <activity android:name=".mvp.activity.ZhihuwebActivity"></activity>
+        <activity android:name=".mvp.activity.ZhihuwebActivity" />
+        <activity android:name=".mvp.activity.SearchActivity"></activity>
     </application>
 
 </manifest>

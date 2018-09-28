@@ -6,10 +6,13 @@ import com.example.lancer.gankl.bean.gank.BeforeBean;
 import com.example.lancer.gankl.bean.gank.IosBean;
 import com.example.lancer.gankl.bean.gank.MeiziBean;
 import com.example.lancer.gankl.bean.gank.ResBean;
+import com.example.lancer.gankl.bean.search.SearchBean;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * author: Lancer
@@ -36,4 +39,8 @@ public interface GankApi {
 
     @GET("/api/data/all/10/{page}")
     Observable<AllBean> getGankAll(@Path("page") int page);
+
+  /*  @GET("/api/search/query/{what}/category/all/count/50/page/1")*/
+  @GET
+  Observable<SearchBean> getGankSearch(@Url String url);
 }
