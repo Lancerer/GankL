@@ -52,12 +52,9 @@ public class ResFragment extends BaseFragment<AndroidView, ResPresenter> impleme
         super.onActivityCreated(savedInstanceState);
         mPresenter.getRes(true, getContext());
         mPresenter.ScrollRecycleView();
-        refreshRes.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshRes.setRefreshing(false);
-                mPresenter.getmore();
-            }
+        refreshRes.setOnRefreshListener(() -> {
+            refreshRes.setRefreshing(false);
+            mPresenter.getmore();
         });
     }
 

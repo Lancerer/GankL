@@ -149,12 +149,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String string = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(MainActivity.this).load(string).into(iv_splash);
-                    }
-                });
+                runOnUiThread(() -> Glide.with(MainActivity.this).load(string).into(iv_splash));
             }
         });
     }
@@ -235,12 +230,7 @@ public class MainActivity extends BaseActivity
         final String[] theme = ThemeUtil.getInstance().getTheme();
         new AlertDialog.Builder(this)
                 .setTitle("选择主题")
-                .setItems(theme, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ThemeUtil.getInstance().setTheme(MainActivity.this, theme[which]);
-                    }
-                }).create().show();
+                .setItems(theme, (dialog, which) -> ThemeUtil.getInstance().setTheme(MainActivity.this, theme[which])).create().show();
     }
 
     @Override

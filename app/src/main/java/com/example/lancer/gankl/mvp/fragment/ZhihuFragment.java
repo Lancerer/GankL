@@ -46,12 +46,9 @@ public class ZhihuFragment extends BaseFragment<AndroidView, ZhihuPresenter> imp
         super.onActivityCreated(savedInstanceState);
         mPresenter.getZhihu();
         mPresenter.ScrollRecycleView();
-        refreshZhihu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshZhihu.setRefreshing(false);
-                /*mPresenter.getmore();*/
-            }
+        refreshZhihu.setOnRefreshListener(() -> {
+            refreshZhihu.setRefreshing(false);
+            /*mPresenter.getmore();*/
         });
     }
 

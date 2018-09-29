@@ -82,12 +82,9 @@ public class GirlFragment extends BaseFragment<GirlView, GirlPresenter> implemen
         super.onActivityCreated(savedInstanceState);
         mPresenter.getGirl(true, getContext());
         mPresenter.ScrollRecycleView();
-        refreshGirl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getMore();
-                refreshGirl.setRefreshing(false);
-            }
+        refreshGirl.setOnRefreshListener(() -> {
+            mPresenter.getMore();
+            refreshGirl.setRefreshing(false);
         });
     }
 

@@ -59,19 +59,16 @@ public class BeforeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             } else {
                 Glide.with(mContext).load(R.drawable.sea).into(((NormalViewHolder) holder).ivAndroidImg);
             }
-            ((NormalViewHolder) holder).cdAndroid.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra("title", mList.get(position).getDesc());
-                    intent.putExtra("url", mList.get(position).getUrl());
-                    intent.putExtra("who", mList.get(position).getWho());
-                    if (images != null) {
-                        intent.putExtra("image", images.get(0));
-                    }
-
-                    mContext.startActivity(intent);
+            ((NormalViewHolder) holder).cdAndroid.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("title", mList.get(position).getDesc());
+                intent.putExtra("url", mList.get(position).getUrl());
+                intent.putExtra("who", mList.get(position).getWho());
+                if (images != null) {
+                    intent.putExtra("image", images.get(0));
                 }
+
+                mContext.startActivity(intent);
             });
             ((NormalViewHolder) holder).itemView.setTag(position);
 

@@ -48,12 +48,9 @@ public class AllFragment extends BaseFragment<AndroidView, AllPresenter> impleme
         mPresenter.getAll(true, getContext());
         mPresenter.ScrollRecycleView();
 
-        refreshAll.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getmore();
-                refreshAll.setRefreshing(false);
-            }
+        refreshAll.setOnRefreshListener(() -> {
+            mPresenter.getmore();
+            refreshAll.setRefreshing(false);
         });
     }
 

@@ -56,12 +56,9 @@ public class IosFragment extends BaseFragment<AndroidView, IosPresenter> impleme
         super.onActivityCreated(savedInstanceState);
         mPresenter.getIos(true,getContext());
         mPresenter.ScrollRecycleView();
-        refreshIos.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshIos.setRefreshing(false);
-                mPresenter.getmore();
-            }
+        refreshIos.setOnRefreshListener(() -> {
+            refreshIos.setRefreshing(false);
+            mPresenter.getmore();
         });
     }
 

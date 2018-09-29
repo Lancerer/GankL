@@ -60,12 +60,7 @@ public class ZhihuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             } else {
                 Glide.with(mContext).load(R.drawable.sea).into(((NormalViewHolder) holder).ivAndroidImg);
             }
-            ((NormalViewHolder) holder).cdAndroid.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mContext.startActivity(ZhihuwebActivity.newIntent(mContext,mList.get(position).getId()));
-                }
-            });
+            ((NormalViewHolder) holder).cdAndroid.setOnClickListener(v -> mContext.startActivity(ZhihuwebActivity.newIntent(mContext,mList.get(position).getId())));
         } else if (holder instanceof FootViewHolder) {
             ((FootViewHolder) holder).pb.setVisibility(View.VISIBLE);
             ((FootViewHolder) holder).tvLoad.setText("正在加载。。。");

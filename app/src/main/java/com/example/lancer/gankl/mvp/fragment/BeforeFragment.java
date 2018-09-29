@@ -57,12 +57,9 @@ public class BeforeFragment extends BaseFragment<AndroidView, BeforePresenter> i
         super.onActivityCreated(savedInstanceState);
         mPresenter.getBefore(true, getContext());
         mPresenter.ScrollRecycleView();
-        refreshBefore.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getmore();
-                refreshBefore.setRefreshing(false);
-            }
+        refreshBefore.setOnRefreshListener(() -> {
+            mPresenter.getmore();
+            refreshBefore.setRefreshing(false);
         });
     }
 
