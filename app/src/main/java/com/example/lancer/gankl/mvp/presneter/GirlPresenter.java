@@ -1,6 +1,12 @@
 package com.example.lancer.gankl.mvp.presneter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +21,7 @@ import com.example.lancer.gankl.adapter.GirlAdapter;
 import com.example.lancer.gankl.api.GankApi;
 import com.example.lancer.gankl.base.BasePresenter;
 import com.example.lancer.gankl.bean.gank.MeiziBean;
+import com.example.lancer.gankl.mvp.activity.BigPicActivity;
 import com.example.lancer.gankl.mvp.view.GirlView;
 import com.example.lancer.gankl.util.Constants;
 import com.example.lancer.gankl.util.NetUtil;
@@ -46,13 +53,6 @@ public class GirlPresenter extends BasePresenter<GirlView> {
     private int lastVisibleItem;
 
 
-    private Info mInfo;
-    View mParent;
-    View mBg;
-    PhotoView mPhotoView;
-    AlphaAnimation in = new AlphaAnimation(0, 1);
-    AlphaAnimation out = new AlphaAnimation(1, 0);
-
     public GirlPresenter(Context context) {
         mContext = context;
     }
@@ -77,9 +77,6 @@ public class GirlPresenter extends BasePresenter<GirlView> {
         if (mGirlView != null) {
             mRecyclerView = mGirlView.getRecycleView();
             mGridLayoutManager = mGirlView.getGridLayoutManager();
-            mParent = mGirlView.getFrameLayout();
-            mBg = mGirlView.getImageView();
-            mPhotoView = mGirlView.getPhotoView();
             NetUtil.getInstance().getGank().create(GankApi.class)
                     .getMeizi(page)
                     .subscribeOn(Schedulers.io())
@@ -90,34 +87,19 @@ public class GirlPresenter extends BasePresenter<GirlView> {
 
                         }
 
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         public void onNext(final MeiziBean value) {
                             if (flag) {
                                 mList = value.getResults();
                                 mGirlAdapter = new GirlAdapter(context, mList);
-                                //   mRecyclerView.setLayoutManager(mGridLayoutManager);
                                 mRecyclerView.setAdapter(mGirlAdapter);
 
-                                mGirlAdapter.setOnItemClickListener(new GirlAdapter.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(View view, int position) {
-                                        PhotoView photoView =  view.findViewById(R.id.iv_girl);
-                                        mInfo = photoView.getInfo();
-                                        Glide.with(mContext).load(mList.get(position).getUrl()).into(mPhotoView);
-                                        mParent.setVisibility(View.VISIBLE);
-                                        mPhotoView.animaFrom(mInfo);
-                                    }
-                                });
-                                mPhotoView.enable();
-                                mPhotoView.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mPhotoView.animaTo(mInfo, new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                mParent.setVisibility(View.GONE);
-                                            }
-                                        });
+                                mGirlAdapter.setOnItemClickListener((view, position) -> {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                        Intent intent = new Intent(context, BigPicActivity.class);
+                                        intent.putExtra("imgurl", mList.get(position).getUrl());
+                                        context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, view, "img").toBundle());
                                     }
                                 });
                             } else {
@@ -126,18 +108,13 @@ public class GirlPresenter extends BasePresenter<GirlView> {
                                 if (mGirlAdapter != null) {
                                     mGirlAdapter.notifyDataSetChanged();
                                 }
-
                             }
                         }
-
                         @Override
                         public void onError(Throwable e) {
-
                         }
-
                         @Override
                         public void onComplete() {
-
                         }
                     });
         }
@@ -164,8 +141,6 @@ public class GirlPresenter extends BasePresenter<GirlView> {
             }
         });
     }
-
-
     public void getMore() {
         getGirl(false, mContext);
         isLoadMore = false;

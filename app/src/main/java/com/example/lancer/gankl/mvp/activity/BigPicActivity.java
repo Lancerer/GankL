@@ -1,9 +1,11 @@
 package com.example.lancer.gankl.mvp.activity;
 
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.lancer.gankl.R;
@@ -16,9 +18,10 @@ public class BigPicActivity extends BaseActivity {
 
     private android.widget.LinearLayout ll;
     private android.widget.ImageView ivBig;
+
     /*
-        * 沉浸式代码
-        * */
+     * 沉浸式代码
+     * */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -49,14 +52,12 @@ public class BigPicActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        if (getIntent() != null) {
             String imgurl = getIntent().getStringExtra("imgurl");
             Glide.with(this).load(imgurl).into(ivBig);
-            ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            ll.setOnClickListener(v -> ActivityCompat.finishAfterTransition(this));
+        }
+
     }
 
     @Override

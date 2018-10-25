@@ -21,10 +21,6 @@ public interface GirlView {
 
     GridLayoutManager getGridLayoutManager();
 
-    FrameLayout getFrameLayout();
 
-    ImageView getImageView();
-
-    PhotoView getPhotoView();
 
 }
